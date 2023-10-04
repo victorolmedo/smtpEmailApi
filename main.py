@@ -9,6 +9,7 @@ def send_email_endpoint():
     data = request.get_json()
     to_email = data.get('to')
     cc_email = data.get('cc')
+    subject = data.get('subject', 'Default Subject')
     body = data.get('body')
 
     # Additional information you can add to the email body.
@@ -17,7 +18,7 @@ def send_email_endpoint():
     if not to_email or not body:
         return jsonify({'error': 'Missing required parameters'}), 400
 
-    result = send_email(to_email, cc_email, body, extra_info)
+    result = send_email(to_email, cc_email, body, extra_info, subject)
     return jsonify({'message': 'Email sent successfully', 'result': result})
 
 

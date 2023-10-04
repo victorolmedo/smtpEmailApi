@@ -4,7 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from decouple import config
 
 
-def send_email(to_email, cc_email, body, extra_info):
+def send_email(to_email, cc_email, body, extra_info, subject):
     # Set up the email server and credentials.
     smtp_server = config('SMTP_SERVER')
     smtp_port = 587
@@ -16,7 +16,7 @@ def send_email(to_email, cc_email, body, extra_info):
     msg['From'] = smtp_username
     msg['To'] = to_email
     msg['Cc'] = cc_email
-    msg['Subject'] = 'Your Email Subject'
+    msg['Subject'] = subject
 
     # Attach the extra information to the email body.
     body += f"\n\nExtra Information: {extra_info}"
